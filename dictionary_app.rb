@@ -1,8 +1,10 @@
 require 'http'
 
 # ask user to enter a word
-p "Please enter a word:"
+p "Please enter a word (you may also enter a word to quit:"
 word = gets.chomp
+
+while word != "q"
 
 # use wordnik API to show the words definition
 definition = HTTP.get("https://api.wordnik.com/v4/word.json/#{word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=")
@@ -32,3 +34,8 @@ pronunciation_data = pronunciation.parse
 how_to_pronounce = pronunciation_data[0]["raw"]
 p "Here is how you pronounce the word #{word}"
 p how_to_pronounce
+
+# ask user to enter a word
+p "Please enter a word (you may also enter 'q' to quit):"
+word = gets.chomp
+end
